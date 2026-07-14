@@ -39,6 +39,8 @@ CRON_BAK = CRON_SRC.with_suffix(CRON_SRC.suffix + ".hermes_lark.bak")
 SAMPLE_CRON = SAMPLES_DIR / "scheduler.py"
 
 def _ensure_sample() -> Path:
+    if SAMPLE_RUN.exists():
+        return SAMPLE_RUN
     src = RUN_BAK if RUN_BAK.exists() else RUN_SRC
     SAMPLES_DIR.mkdir(parents=True, exist_ok=True)
     if src.exists():
@@ -63,6 +65,8 @@ def run_copy(tmp_path: Path) -> Path:
 
 
 def _ensure_cron_sample() -> Path:
+    if SAMPLE_CRON.exists():
+        return SAMPLE_CRON
     src = CRON_BAK if CRON_BAK.exists() else CRON_SRC
     SAMPLES_DIR.mkdir(parents=True, exist_ok=True)
     if src.exists():
